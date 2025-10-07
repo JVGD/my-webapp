@@ -81,11 +81,10 @@ def show_tokenizers():
         st.header("🧩 Tokenization Results")
 
         # Create tabs for different views
-        tab1, tab2, tab3, tab4 = st.tabs(["Tokens", "Token IDs", "Decoded Text", "Statistics"])
+        tab1, tab2 = st.tabs(["Tokens", "Tokenizer Characteristics"])
 
         with tab1:
-            st.subheader("Text Tokens")
-            st.markdown("Here's how the text is broken down into tokens:")
+            st.markdown("Text is broken down into tokens (words or subwords):")
 
             # Display tokens with highlighting
             token_html = ""
@@ -99,35 +98,17 @@ def show_tokenizers():
 
             st.markdown(token_html, unsafe_allow_html=True)
 
-            st.markdown("**Token List:**")
-            for i, token in enumerate(tokens, 1):
-                st.write(f"{i:2d}. `{token}`")
-
-        with tab2:
-            st.subheader("Token IDs")
-            st.markdown("Each token is converted to a numerical ID:")
-
             # Display token IDs
+            st.markdown("Each token is mapped to a numerical ID in the model vocabulary:")
             st.code(str(token_ids))
 
-            # Display mapping
-            st.markdown("**Token → ID Mapping:**")
-            for token, token_id in zip(tokens, token_ids[1:-1] if len(token_ids) > len(tokens) else token_ids):
-                st.write(f"`{token}` → `{token_id}`")
+            # Text decoding or reconstruction from token IDs
+            st.markdown("Text decoding or reconstruction from token IDs:")
+            st.code(decoded_text, wrap_lines=True)
 
-        with tab3:
-            st.subheader("Decoded Text")
-            st.markdown("Text reconstructed from token IDs:")
-            st.text_area("Decoded:", value=decoded_text, height=100, disabled=True)
 
-            # Check if decoding is lossless
-            if decoded_text.strip() == input_text.strip():
-                st.success("✅ Lossless encoding/decoding")
-            else:
-                st.warning("⚠️ Some information was lost in encoding/decoding")
-
-        with tab4:
-            st.subheader("Tokenization Statistics")
+        with tab2:
+            st.subheader("Tokenizer Characteristics")
 
             col1, col2, col3 = st.columns(3)
 

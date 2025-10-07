@@ -146,11 +146,6 @@ def show_tokenizers():
             st.write(f"- Model max length: {tokenizer.model_max_length:,}")
             st.write(f"- Special tokens: {len(tokenizer.special_tokens_map)}")
 
-            if hasattr(tokenizer, "unk_token") and tokenizer.unk_token:
-                st.write(f"- Unknown token: `{tokenizer.unk_token}`")
-            if hasattr(tokenizer, "pad_token") and tokenizer.pad_token:
-                st.write(f"- Padding token: `{tokenizer.pad_token}`")
-
     else:
         st.info("👆 Enter some text above to see how it gets tokenized!")
 

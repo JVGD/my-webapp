@@ -60,9 +60,9 @@ def show_home():
         Explore text tokenization with different models and see how text is processed.
 
         **Technologies:** Transformers, PyTorch, Streamlit
+
+        💡 *Use the sidebar navigation to explore this demo!*
         """)
-        if st.button("View Tokenizers Demo", key="tokenizers_btn"):
-            st.switch_page("pages/tokenizers.py")
 
     with col2:
         st.markdown("""

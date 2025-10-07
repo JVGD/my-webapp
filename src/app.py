@@ -4,15 +4,18 @@ from pages.tokenizers import show_tokenizers
 
 # Page configuration
 st.set_page_config(
-    page_title="Portfolio - Javier Vargas", page_icon="🚀", layout="wide", initial_sidebar_state="expanded"
+    page_title="Portfolio - Javier Vargas",
+    page_icon="🚀",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# Sidebar navigation
-st.sidebar.title("Navigation")
-page = st.sidebar.selectbox("Choose a page", ["Home", "Tokenizers"])
+# Define pages using st.Page
+home_page = st.Page(show_home, title="Home", icon="🏠")
+tokenizers_page = st.Page(show_tokenizers, title="Tokenizers", icon="🔤")
 
-# Page routing
-if page == "Home":
-    show_home()
-elif page == "Tokenizers":
-    show_tokenizers()
+# Create navigation
+pg = st.navigation([home_page, tokenizers_page])
+
+# Run the selected page
+pg.run()

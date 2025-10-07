@@ -186,7 +186,6 @@ def show_tokenizers():
         - Con: Long sequences, harder to capture meaning
         """)
 
-    # Navigation back to home
+    # Navigation info
     st.markdown("---")
-    if st.button("← Back to Portfolio"):
-        st.switch_page("app.py")
+    st.info("💡 Use the navigation menu in the sidebar to switch between pages.")

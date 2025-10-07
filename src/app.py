@@ -4,10 +4,7 @@ from pages.tokenizers import show_tokenizers
 
 # Page configuration
 st.set_page_config(
-    page_title="Portfolio - Javier Vargas",
-    page_icon="🚀",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    page_title="Portfolio - Javier Vargas", page_icon="🚀", layout="wide", initial_sidebar_state="expanded"
 )
 
 # Define pages using st.Page

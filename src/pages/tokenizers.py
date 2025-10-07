@@ -92,8 +92,10 @@ def show_tokenizers():
 
             for i, token in enumerate(tokens):
                 color = colors[i % len(colors)]
-                # Escape HTML and handle special tokens
-                display_token = token.replace("<", "&lt;").replace(">", "&gt;")
+                # Escape HTML and handle special tokens (including GPT-2 BPE tokens)
+                display_token = (
+                    token.replace("<", "&lt;").replace(">", "&gt;").replace("|", "&#124;").replace("Ġ", "▁")
+                )  # Replace BPE space marker with visible character
                 token_html += f'<span style="background-color: {color}; padding: 2px 4px; margin: 1px; border-radius: 3px; font-family: monospace;">{display_token}</span> '
 
             st.markdown(token_html, unsafe_allow_html=True)
@@ -105,7 +107,6 @@ def show_tokenizers():
             # Text decoding or reconstruction from token IDs
             st.markdown("Text decoding or reconstruction from token IDs:")
             st.code(decoded_text, wrap_lines=True)
-
 
         with tab2:
             st.subheader("Tokenizer Characteristics")
@@ -129,11 +130,9 @@ def show_tokenizers():
                 table_data = []
                 for token_name, token_value in tokenizer.special_tokens_map.items():
                     token_id = tokenizer.convert_tokens_to_ids(token_value)
-                    table_data.append({
-                        "Token": f"`{token_value}`",
-                        "Token Name": token_name,
-                        "Token ID": str(token_id)
-                    })
+                    table_data.append(
+                        {"Token": f"`{token_value}`", "Token Name": token_name, "Token ID": str(token_id)}
+                    )
 
                 # Display as a table
                 st.table(table_data)

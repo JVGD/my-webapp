@@ -122,6 +122,24 @@ def show_tokenizers():
                 compression_ratio = len(input_text) / len(tokens) if tokens else 0
                 st.metric("Chars per Token", f"{compression_ratio:.2f}")
 
+            # Special tokens mapping
+            st.markdown("**Special Tokens:**")
+            if tokenizer.special_tokens_map:
+                # Prepare data for the table
+                table_data = []
+                for token_name, token_value in tokenizer.special_tokens_map.items():
+                    token_id = tokenizer.convert_tokens_to_ids(token_value)
+                    table_data.append({
+                        "Token": f"`{token_value}`",
+                        "Token Name": token_name,
+                        "Token ID": str(token_id)
+                    })
+
+                # Display as a table
+                st.table(table_data)
+            else:
+                st.write("No special tokens defined for this tokenizer.")
+
             # Additional stats
             st.markdown("**Additional Information:**")
             st.write(f"- Vocabulary size: {tokenizer.vocab_size:,}")

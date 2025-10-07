@@ -1,0 +1,51 @@
+[project]
+name = "python-repo-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Your Name", email = "j.vargas.g.d@gmail.com" }]
+license = { file = "LICENSE" }
+dependencies = [
+    "streamlit>=1.50.0",
+    "torch>=2.8.0",
+    "transformers>=4.57.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18.2",
+    "pre-commit>=4.0.1",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.13.2",
+]
+
+[tool.ruff]
+# Set the maximum allowed line length for the linter and formatter.
+line-length = 120
+
+# You can add directories/files to exclude from both linting and formatting.
+exclude = [ ".eggs", "**/*.egg", ".git", ".mypy_cache", ".venv", "__pycache__", ".task"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # Pyflakes (general bugs/errors)
+    "W",   # pycodestyle warnings
+    "I",   # isort (import sorting)
+    "B",   # flake8-bugbear (common design issues/bugs)
+    "UP",  # pyupgrade (modernizing syntax)
+]
+
+[tool.mypy]
+strict = true
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101", "B601"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]

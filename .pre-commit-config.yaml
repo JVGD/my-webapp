@@ -1,0 +1,27 @@
+# Pre-commit configuration for Python project with YAML and JSON support
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  # General file formatting and basic checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # General file checks
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: pretty-format-json
+        args: ['--autofix', '--indent', '2', '--no-sort-keys']
+      - id: check-merge-conflict
+      - id: debug-statements
+
+  - repo: local
+    hooks:
+      # Ruff format (formatter)
+      - id: ruff-format-local
+        name: Ruff Format (uv run)
+        entry: uv run ruff format
+        language: system
+        types: [python]
